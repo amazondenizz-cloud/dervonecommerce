@@ -1047,24 +1047,65 @@
             filter: none;
         }
 
-        .brand-logos {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 3rem 2rem;
-            align-items: center;
-            justify-items: center;
+        .brand-marquee-container {
+            overflow: hidden;
+            width: 100%;
+            padding: 2rem 0;
+            position: relative;
             margin-top: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Gradient mask on left and right for fade out effect */
+        .brand-marquee-container::before,
+        .brand-marquee-container::after {
+            content: "";
+            height: 100%;
+            width: 15%;
+            max-width: 200px;
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            pointer-events: none;
+        }
+        
+        .brand-marquee-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-white) 0%, rgba(255,255,255,0) 100%);
+        }
+        
+        .brand-marquee-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-white) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .brand-track {
+            display: flex;
+            width: max-content;
+            animation: brand-scroll 35s linear infinite;
+        }
+
+        .brand-marquee-container:hover .brand-track {
+            animation-play-state: paused;
+        }
+
+        .brand-group {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            padding-right: 5rem;
         }
 
         .brand-item {
+            flex-shrink: 0;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: center;
+            justify-content: center;
         }
 
         .brand-item img {
-            width: 100%;
+            width: auto;
             max-width: 140px;
             max-height: 55px;
             object-fit: contain;
@@ -1081,6 +1122,15 @@
         .brand-item:hover img {
             filter: none;
             opacity: 1;
+        }
+
+        @keyframes brand-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         /* STRATEGIC PILLARS SECTION */
@@ -1397,8 +1447,9 @@
                 display: none;
             }
 
-            .brand-logos {
-                grid-template-columns: repeat(3, 1fr);
+            .brand-group {
+                gap: 4rem;
+                padding-right: 4rem;
             }
 
             .footer-grid {
@@ -1537,9 +1588,17 @@
                 padding: 2rem 1.5rem;
             }
 
-            .brand-logos {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 2rem 1rem !important;
+            .brand-group {
+                gap: 3rem;
+                padding-right: 3rem;
+            }
+            .brand-item img {
+                max-width: 100px;
+                max-height: 45px;
+            }
+            .brand-item img.custom-brand {
+                max-width: 130px;
+                max-height: 60px;
             }
 
             /* Fix Timeline */
@@ -2538,19 +2597,33 @@
 
             <div style="margin-top: 5rem; border-top: 1px solid var(--border-light); padding-top: 4rem;">
                 <h2 class="section-title text-center">Brands We Work With</h2>
-                <div class="brand-logos">
-                    <div class="brand-item"><img src="assets/b1.svg" alt="Casper"></div>
-                    <div class="brand-item"><img src="assets/b2.svg" alt="Hydro Flask"></div>
-                    <div class="brand-item"><img src="assets/b3.svg" alt="Tula Skincare"></div>
-                    <div class="brand-item"><img src="assets/b4.svg" alt="Tatcha"></div>
-                    <div class="brand-item"><img src="assets/prozone.png" class="custom-brand" alt="ProZone Golf Tent">
+                <div class="brand-marquee-container">
+                    <div class="brand-track">
+                        <div class="brand-group">
+                            <div class="brand-item"><img src="assets/b1.svg" alt="Casper"></div>
+                            <div class="brand-item"><img src="assets/b2.svg" alt="Hydro Flask"></div>
+                            <div class="brand-item"><img src="assets/b3.svg" alt="Tula Skincare"></div>
+                            <div class="brand-item"><img src="assets/b4.svg" alt="Tatcha"></div>
+                            <div class="brand-item"><img src="assets/prozone.png" class="custom-brand" alt="ProZone Golf Tent"></div>
+                            <div class="brand-item"><img src="assets/aquacomfort.png" class="custom-brand" alt="AquaComfort"></div>
+                            <div class="brand-item"><img src="assets/selfynity.png" class="custom-brand" alt="Selfynity"></div>
+                            <div class="brand-item"><img src="assets/pl2.png" class="custom-brand" alt="PL Brand 2"></div>
+                            <div class="brand-item"><img src="assets/pl3.png" class="custom-brand" alt="PL Brand 3"></div>
+                            <div class="brand-item"><img src="assets/pl4.png" class="custom-brand" alt="PL Brand 4"></div>
+                        </div>
+                        <div class="brand-group" aria-hidden="true">
+                            <div class="brand-item"><img src="assets/b1.svg" alt="Casper"></div>
+                            <div class="brand-item"><img src="assets/b2.svg" alt="Hydro Flask"></div>
+                            <div class="brand-item"><img src="assets/b3.svg" alt="Tula Skincare"></div>
+                            <div class="brand-item"><img src="assets/b4.svg" alt="Tatcha"></div>
+                            <div class="brand-item"><img src="assets/prozone.png" class="custom-brand" alt="ProZone Golf Tent"></div>
+                            <div class="brand-item"><img src="assets/aquacomfort.png" class="custom-brand" alt="AquaComfort"></div>
+                            <div class="brand-item"><img src="assets/selfynity.png" class="custom-brand" alt="Selfynity"></div>
+                            <div class="brand-item"><img src="assets/pl2.png" class="custom-brand" alt="PL Brand 2"></div>
+                            <div class="brand-item"><img src="assets/pl3.png" class="custom-brand" alt="PL Brand 3"></div>
+                            <div class="brand-item"><img src="assets/pl4.png" class="custom-brand" alt="PL Brand 4"></div>
+                        </div>
                     </div>
-                    <div class="brand-item"><img src="assets/aquacomfort.png" class="custom-brand" alt="AquaComfort">
-                    </div>
-                    <div class="brand-item"><img src="assets/selfynity.png" class="custom-brand" alt="Selfynity"></div>
-                    <div class="brand-item"><img src="assets/pl2.png" class="custom-brand" alt="PL Brand 2"></div>
-                    <div class="brand-item"><img src="assets/pl3.png" class="custom-brand" alt="PL Brand 3"></div>
-                    <div class="brand-item"><img src="assets/pl4.png" class="custom-brand" alt="PL Brand 4"></div>
                 </div>
             </div>
         </div>
